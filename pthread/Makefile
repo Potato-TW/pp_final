@@ -4,7 +4,7 @@ CXXFLAGS = -O3 -std=c++17 `pkg-config --cflags --libs opencv4` -pthread
 
 LDFLAGS = `pkg-config --libs opencv4`
 
-TARGET = hough_pthreads
+TARGET = hough_pthreads.out
 
 all: $(TARGET)
 

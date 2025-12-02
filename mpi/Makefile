@@ -1,6 +1,6 @@
 MPICXX = mpicxx
 CXXFLAGS = -O3 -std=c++17 `pkg-config --cflags --libs opencv4`
-TARGET = hough_mpi
+TARGET = hough_mpi.out
 
 all: $(TARGET)
 
