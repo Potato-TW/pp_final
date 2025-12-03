@@ -18,7 +18,7 @@ using namespace std;
 // -------- Config / structs --------
 struct Params {
     string input_image;
-    string output_image = "out.png";
+    string output_image = "out_pthread.png";
     int num_threads = 8;
     int chunk_size = 1024;  // edges per chunk
     // SHT params
