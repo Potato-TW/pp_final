@@ -8,8 +8,8 @@ using namespace std::chrono;
 int main(int argc, char** argv) {
     if (argc < 4) {
         cout << "Usage:\n";
-        cout << "  ./opencv_ht line   input.png  output.png\n";
-        cout << "  ./opencv_ht circle input.png  output.png\n";
+        cout << "  ./hough_opencv line   input.png  output.png\n";
+        cout << "  ./hough_opencv circle input.png  output.png\n";
         return -1;
     }
 
