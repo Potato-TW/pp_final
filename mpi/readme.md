@@ -1,0 +1,1 @@
+MPI 版本使用 mpicxx，rank0 讀圖與建 edgelist，然後 broadcast/ scatter edges 到所有 ranks；每個 rank 對分配到的 edges 做 local 投票（line: local accumulator rho×theta；circle: 每 radius local 2D accumulator），最後 MPI_Reduce 合併到 rank0，rank0 做 peak detection與輸出。每個 rank 會把自己計時，rank0 也會報總計。

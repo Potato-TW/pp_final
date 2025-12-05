@@ -1,0 +1,1 @@
+這是我之前給你的 circle/line OpenMP 實作整合成單一檔案，會用 #pragma omp parallel for 加速 voting。它會輸出 per-phase 時間與 per-radius 小摘要。
