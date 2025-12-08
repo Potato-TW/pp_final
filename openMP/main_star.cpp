@@ -161,12 +161,12 @@ int main(int argc, char** argv) {
         cout << "Voting total: " << vote_ms << " ms\n";
         cout << "Best circle: cx=" << best_cx << " cy=" << best_cy << " r=" << best_r
              << " votes=" << best_votes << "\n";
-        Mat out = img.clone();
-        if (best_votes > 0) {
-            circle(out, Point(best_cx, best_cy), best_r, Scalar(0, 255, 0), 3);
-            circle(out, Point(best_cx, best_cy), 3, Scalar(0, 0, 255), -1);
-        }
-        imwrite(p.output, out);
+        // Mat out = img.clone();
+        // if (best_votes > 0) {
+        //     circle(out, Point(best_cx, best_cy), best_r, Scalar(0, 255, 0), 3);
+        //     circle(out, Point(best_cx, best_cy), 3, Scalar(0, 0, 255), -1);
+        // }
+        // imwrite(p.output, out);
     } else {
         int theta_step = p.theta_step_deg;
         int ntheta = 180 / theta_step;
@@ -177,6 +177,8 @@ int main(int argc, char** argv) {
         fill(acc.begin(), acc.end(), 0);
         auto t_vote = high_resolution_clock::now();
         int twin = p.theta_window_deg;
+        cout << "Edges: " << edgelist.size() << " Theta bins: " << ntheta << " Rho bins: " << nrho
+             << "\n";
 #pragma omp parallel for schedule(dynamic, 1024)
         for (size_t i = 0; i < edgelist.size(); ++i) {
             const Edge& e = edgelist[i];
@@ -216,13 +218,13 @@ int main(int argc, char** argv) {
         float best_rho = br - rho_off;
         cout << "Best line: rho=" << best_rho << " theta(deg)=" << (best_theta * 180.0f / CV_PI)
              << " votes=" << best_votes << "\n";
-        Mat out = img.clone();
-        double a = cos(best_theta), b = sin(best_theta);
-        double x0 = a * best_rho, y0 = b * best_rho;
-        Point p1(cvRound(x0 + 2000 * (-b)), cvRound(y0 + 2000 * (a)));
-        Point p2(cvRound(x0 - 2000 * (-b)), cvRound(y0 - 2000 * (a)));
-        line(out, p1, p2, Scalar(0, 0, 255), 3);
-        imwrite(p.output, out);
+        // Mat out = img.clone();
+        // double a = cos(best_theta), b = sin(best_theta);
+        // double x0 = a * best_rho, y0 = b * best_rho;
+        // Point p1(cvRound(x0 + 2000 * (-b)), cvRound(y0 + 2000 * (a)));
+        // Point p2(cvRound(x0 - 2000 * (-b)), cvRound(y0 - 2000 * (a)));
+        // line(out, p1, p2, Scalar(0, 0, 255), 3);
+        // imwrite(p.output, out);
     }
 
     auto t_total_end = high_resolution_clock::now();

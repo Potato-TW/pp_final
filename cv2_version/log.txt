@@ -1,0 +1,12 @@
+Detected lines: 149389
+===== OpenCV Line Detection Timing =====
+Canny:        174.997 ms
+HoughLines:   300.516 ms
+Total:        20690.4 ms
+Saved output to: test.png
+Detected circles: 204
+===== OpenCV Circle Detection Timing =====
+Canny:         159.868 ms
+HoughCircles:  6152.46 ms
+Total:         7981.88 ms
+Saved output to: test.png

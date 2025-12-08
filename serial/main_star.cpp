@@ -108,6 +108,7 @@ int main(int argc, char** argv) {
         int rcount = (rmax - rmin) / rstep + 1;
         cout << "Edges: " << edgelist.size() << " Radii: " << rcount << "\n";
         int best_votes = 0, best_cx = 0, best_cy = 0, best_r = 0;
+        
         auto t_vote = high_resolution_clock::now();
         // per-radius accumulator to save memory
         vector<int> acc((size_t)W * H);

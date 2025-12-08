@@ -161,10 +161,10 @@ int main(int argc, char** argv) {
         long long acc_size = 1LL * W * H * rcount;
 
         cout << "Circle mode: W=" << W << " H=" << H << " rcount=" << rcount << endl;
-        if (acc_size > (1LL << 28)) {
-            cerr << "Accumulator too large — reduce r range or image size!" << endl;
-            return -1;
-        }
+        // if (acc_size > (1LL << 28)) {
+        //     cerr << "Accumulator too large — reduce r range or image size!" << endl;
+        //     return -1;
+        // }
 
         vector<int> acc(acc_size, 0);
 

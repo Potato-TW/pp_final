@@ -1,0 +1,8 @@
+Edges: 1339739 Theta bins: 180 Rho bins: 33685
+Voting total: 23.5472 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=172.979 Grad=479.634 Total=6082.83
+Edges: 1339739 Radii: 101
+Voting total: 8228.55 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=114.17 Grad=330.932 Total=13911.3

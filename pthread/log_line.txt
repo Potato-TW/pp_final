@@ -1,0 +1,80 @@
+Threads: 1
+Voting total: 176.568 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=186.431 Grad=451.22 Total=6757.13
+
+Threads: 2
+Voting total: 75.6567 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=143.512 Grad=288.38 Total=6320.27
+
+Threads: 3
+Voting total: 59.8276 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=134.101 Grad=280.733 Total=6282.98
+
+Threads: 4
+Voting total: 46.0285 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=113.007 Grad=272.499 Total=6122.73
+
+Threads: 5
+Voting total: 41.6983 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=138.147 Grad=319.794 Total=6305.55
+
+Threads: 6
+Voting total: 38.6561 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=140.868 Grad=356.345 Total=6310.55
+
+Threads: 7
+Voting total: 29.6741 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=149.657 Grad=661.652 Total=7289.74
+
+Threads: 8
+Voting total: 30.9983 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=135.345 Grad=419.809 Total=6621.67
+
+Threads: 9
+Voting total: 24.6379 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=134.978 Grad=324.703 Total=6139.59
+
+Threads: 10
+Voting total: 25.3169 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=135.355 Grad=342.773 Total=6368.04
+
+Threads: 11
+Voting total: 21.9599 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=157.766 Grad=288.614 Total=6214.23
+
+Threads: 12
+Voting total: 20.7509 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=124.136 Grad=261.744 Total=5960.49
+
+Threads: 13
+Voting total: 20.3949 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=115.941 Grad=277.2 Total=6214.53
+
+Threads: 14
+Voting total: 24.2443 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=137.756 Grad=356.728 Total=6352.82
+
+Threads: 15
+Voting total: 22.6106 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=139.703 Grad=309.815 Total=6360.13
+
+Threads: 16
+Voting total: 24.869 ms
+Best line: rho=0 theta(deg)=90 votes=211
+Timing summary (ms): Canny=136.256 Grad=366.722 Total=6720.97
+

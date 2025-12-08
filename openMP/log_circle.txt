@@ -1,0 +1,96 @@
+Threads: 1
+Edges: 1339739 Radii: 101
+Voting total: 13556.1 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=134.405 Grad=429.807 Total=15615.8
+
+Threads: 2
+Edges: 1339739 Radii: 101
+Voting total: 10375.9 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=130.932 Grad=361.536 Total=12419.4
+
+Threads: 3
+Edges: 1339739 Radii: 101
+Voting total: 8996.33 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=121.066 Grad=303.262 Total=10941.2
+
+Threads: 4
+Edges: 1339739 Radii: 101
+Voting total: 8604.55 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=131.712 Grad=341.963 Total=10540.7
+
+Threads: 5
+Edges: 1339739 Radii: 101
+Voting total: 8299.43 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=111.252 Grad=299.348 Total=10168.4
+
+Threads: 6
+Edges: 1339739 Radii: 101
+Voting total: 8133.05 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=129.097 Grad=360.421 Total=10169
+
+Threads: 7
+Edges: 1339739 Radii: 101
+Voting total: 8197.16 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=121.518 Grad=344.224 Total=10239.7
+
+Threads: 8
+Edges: 1339739 Radii: 101
+Voting total: 8116.25 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=113.528 Grad=343.178 Total=10101
+
+Threads: 9
+Edges: 1339739 Radii: 101
+Voting total: 7961.4 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=128.09 Grad=361.177 Total=9917.54
+
+Threads: 10
+Edges: 1339739 Radii: 101
+Voting total: 7785.89 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=137.001 Grad=294.819 Total=9715.11
+
+Threads: 11
+Edges: 1339739 Radii: 101
+Voting total: 7854.57 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=105.379 Grad=292.683 Total=9743.77
+
+Threads: 12
+Edges: 1339739 Radii: 101
+Voting total: 7909.78 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=119.624 Grad=294.017 Total=9829.47
+
+Threads: 13
+Edges: 1339739 Radii: 101
+Voting total: 7846.92 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=114.119 Grad=308.602 Total=9764.43
+
+Threads: 14
+Edges: 1339739 Radii: 101
+Voting total: 7840.47 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=111.86 Grad=309.886 Total=9777.27
+
+Threads: 15
+Edges: 1339739 Radii: 101
+Voting total: 7975.61 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=119 Grad=300.882 Total=9915.86
+
+Threads: 16
+Edges: 1339739 Radii: 101
+Voting total: 8058.6 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=115.457 Grad=305.996 Total=9963.51
+

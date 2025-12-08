@@ -1,0 +1,96 @@
+Threads: 1
+Edges: 1339739
+Voting total: 13992.7 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=129.192 Grad=317.379 Total=20872.9
+
+Threads: 2
+Edges: 1339739
+Voting total: 10720.3 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=115.582 Grad=287.628 Total=16476.7
+
+Threads: 3
+Edges: 1339739
+Voting total: 9874.9 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=144.833 Grad=283.274 Total=15859.6
+
+Threads: 4
+Edges: 1339739
+Voting total: 10273.9 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=136.218 Grad=436.55 Total=16525.6
+
+Threads: 5
+Edges: 1339739
+Voting total: 8902.27 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=140.526 Grad=318.789 Total=14690.5
+
+Threads: 6
+Edges: 1339739
+Voting total: 8785.41 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=139.367 Grad=279.096 Total=14517.6
+
+Threads: 7
+Edges: 1339739
+Voting total: 9204.7 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=166.238 Grad=278.484 Total=15460.5
+
+Threads: 8
+Edges: 1339739
+Voting total: 8723.8 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=130.069 Grad=369.955 Total=14609.5
+
+Threads: 9
+Edges: 1339739
+Voting total: 8348.41 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=142.77 Grad=333.587 Total=14205.1
+
+Threads: 10
+Edges: 1339739
+Voting total: 8223.46 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=118.72 Grad=266.342 Total=13843
+
+Threads: 11
+Edges: 1339739
+Voting total: 8303.77 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=119.562 Grad=303.5 Total=14763.2
+
+Threads: 12
+Edges: 1339739
+Voting total: 8466.17 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=140.3 Grad=290.309 Total=14293.8
+
+Threads: 13
+Edges: 1339739
+Voting total: 8007.97 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=136.345 Grad=343.826 Total=13834.5
+
+Threads: 14
+Edges: 1339739
+Voting total: 8096.63 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=131.416 Grad=274.118 Total=13809.3
+
+Threads: 15
+Edges: 1339739
+Voting total: 8335.4 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=138.146 Grad=268.753 Total=14707.8
+
+Threads: 16
+Edges: 1339739
+Voting total: 8966.39 ms
+Best circle: cx=3365 cy=3568 r=27 votes=11
+Timing summary (ms): Canny=179.456 Grad=471.473 Total=15424.5
+

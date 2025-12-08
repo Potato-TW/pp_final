@@ -1,0 +1,7 @@
+Edges: 1339740
+Line mode: rho_bins=33686 theta_bins=180
+Runtime (Serial Line voting only): 652.449 ms
+Saved out_serial.png
+Edges: 1339740
+Circle mode: W=14575 H=8441 rcount=101
+Accumulator too large — reduce r range or image size!

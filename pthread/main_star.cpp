@@ -134,11 +134,16 @@ int main(int argc, char** argv) {
     }
     Mat gray;
     cvtColor(img, gray, COLOR_BGR2GRAY);
+
+
     auto t0 = high_resolution_clock::now();
+
     Mat edges;
     Canny(gray, edges, p.canny_low, p.canny_high);
+
     auto t1 = high_resolution_clock::now();
     double canny_ms = duration<double, milli>(t1 - t0).count();
+    
     t0 = high_resolution_clock::now();
     Mat gx, gy;
     Sobel(gray, gx, CV_32F, 1, 0, 3);
@@ -159,11 +164,13 @@ int main(int argc, char** argv) {
     auto t2 = high_resolution_clock::now();
     double grad_ms = duration<double, milli>(t2 - t0).count();
 
-    int W = gray.cols, H = gray.rows;
 
+    int W = gray.cols, H = gray.rows;
     if (p.mode == "circle") {
         int rmin = p.rmin, rmax = p.rmax, rstep = p.rstep;
         int best_votes = 0, best_cx = 0, best_cy = 0, best_r = 0;
+        cout << "Edges: " << edgelist.size() << "\n";
+
         auto t_vote = high_resolution_clock::now();
         vector<int> acc((size_t)W * H);
         for (int r = rmin; r <= rmax; r += rstep) {
@@ -185,6 +192,7 @@ int main(int argc, char** argv) {
                         &tids[ti], nullptr, [](void*) -> void* { return nullptr; }, nullptr);
             }
             for (int ti = 0; ti < T; ++ti) pthread_join(tids[ti], nullptr);
+            
             int local_best = 0, lcx = 0, lcy = 0;
             for (size_t i = 0; i < acc.size(); ++i)
                 if (acc[i] > local_best) {
@@ -204,12 +212,12 @@ int main(int argc, char** argv) {
         cout << "Voting total: " << vote_ms << " ms\n";
         cout << "Best circle: cx=" << best_cx << " cy=" << best_cy << " r=" << best_r
              << " votes=" << best_votes << "\n";
-        Mat out = img.clone();
-        if (best_votes > 0) {
-            circle(out, Point(best_cx, best_cy), best_r, Scalar(0, 255, 0), 3);
-            circle(out, Point(best_cx, best_cy), 3, Scalar(0, 0, 255), -1);
-        }
-        imwrite(p.output, out);
+        // Mat out = img.clone();
+        // if (best_votes > 0) {
+        //     circle(out, Point(best_cx, best_cy), best_r, Scalar(0, 255, 0), 3);
+        //     circle(out, Point(best_cx, best_cy), 3, Scalar(0, 0, 255), -1);
+        // }
+        // imwrite(p.output, out);
     } else {
         int theta_step = p.theta_step_deg;
         int ntheta = 180 / theta_step;
@@ -261,13 +269,13 @@ int main(int argc, char** argv) {
         float best_rho = br - rho_off;
         cout << "Best line: rho=" << best_rho << " theta(deg)=" << (best_theta * 180.0f / CV_PI)
              << " votes=" << best_votes << "\n";
-        Mat out = img.clone();
-        double a = cos(best_theta), b = sin(best_theta);
-        double x0 = a * best_rho, y0 = b * best_rho;
-        Point p1(cvRound(x0 + 2000 * (-b)), cvRound(y0 + 2000 * (a)));
-        Point p2(cvRound(x0 - 2000 * (-b)), cvRound(y0 - 2000 * (a)));
-        line(out, p1, p2, Scalar(0, 0, 255), 3);
-        imwrite(p.output, out);
+        // Mat out = img.clone();
+        // double a = cos(best_theta), b = sin(best_theta);
+        // double x0 = a * best_rho, y0 = b * best_rho;
+        // Point p1(cvRound(x0 + 2000 * (-b)), cvRound(y0 + 2000 * (a)));
+        // Point p2(cvRound(x0 - 2000 * (-b)), cvRound(y0 - 2000 * (a)));
+        // line(out, p1, p2, Scalar(0, 0, 255), 3);
+        // imwrite(p.output, out);
     }
 
     auto t_total_end = high_resolution_clock::now();
