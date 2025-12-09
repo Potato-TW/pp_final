@@ -3,22 +3,30 @@
 CXX = g++
 CXXFLAGS = -O3 -std=c++17 -fopenmp
 LDFLAGS = `pkg-config --cflags --libs opencv4`
+AVX2=-mavx2 -mfma
 
-TARGET_LINE = hough_line_omp.out
-TARGET_CIRCLE = hough_circle_omp.out
 
-TARGET_STAR = hough_star_omp.out
+TARGET_STAR_STATIC = hough_star_static_omp.out
+TARGET_STAR_DYNAMIC = hough_star_dynamic_omp.out
+TARGET_AVX = hough_avx_omp.out
 
-all: line circle star
+MAIN_AVX = main_avx.cpp
+MAIN_STAR_DYNAMIC = main_star_dynamic.cpp
+MAIN_STAR_STATIC = main_star_static.cpp
 
-line: line.cpp
-	$(CXX) $(CXXFLAGS) -o $(TARGET_LINE) line.cpp $(LDFLAGS) 
+all: $(TARGET_AVX) $(TARGET_STAR_DYNAMIC) $(TARGET_STAR_STATIC)
 
-circle: circle.cpp
-	$(CXX) $(CXXFLAGS) -o $(TARGET_CIRCLE) circle.cpp $(LDFLAGS) 
+$(TARGET_AVX): $(MAIN_AVX)
+	$(CXX) $(CXXFLAGS) -o $(TARGET_AVX) $(MAIN_AVX) $(LDFLAGS) $(AVX2)
 
-star: main_star.cpp
-	$(CXX) $(CXXFLAGS) -o $(TARGET_STAR) main_star.cpp $(LDFLAGS)
+$(TARGET_STAR_STATIC): $(MAIN_STAR_STATIC)
+	$(CXX) $(CXXFLAGS) -o $(TARGET_STAR_STATIC) $(MAIN_STAR_STATIC) $(LDFLAGS) $(AVX2)
+
+$(TARGET_STAR_DYNAMIC): $(MAIN_STAR_DYNAMIC)
+	$(CXX) $(CXXFLAGS) -o $(TARGET_STAR_DYNAMIC) $(MAIN_STAR_DYNAMIC) $(LDFLAGS) $(AVX2)
 
 clean:
-	rm -f $(TARGET_LINE) $(TARGET_CIRCLE) $(TARGET_STAR)
+	rm -f *.out
+
+cleanall: clean
+	rm -f *.png

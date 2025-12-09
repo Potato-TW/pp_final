@@ -14,8 +14,8 @@ using namespace std::chrono;
 
 struct Params {
     string input, output = "output.png", mode = "circle";
-    int rmin = 20, rmax = 120, rstep = 1;
-    int canny_low = 50, canny_high = 150;
+    int rmin = 100, rmax = 200, rstep = 1;
+    int canny_low = 80, canny_high = 180;
     int theta_step_deg = 1, theta_window_deg = 4;
 };
 
@@ -84,7 +84,6 @@ int main(int argc, char** argv) {
         float ori;
     };
     vector<Edge> edgelist;
-    edgelist.reserve(1000000);
     for (int y = 0; y < edges.rows; y++) {
         const uchar* er = edges.ptr<uchar>(y);
         const float* gxr = gx.ptr<float>(y);
@@ -115,6 +114,7 @@ int main(int argc, char** argv) {
         for (int r = rmin; r <= rmax; r += rstep) {
             fill(acc.begin(), acc.end(), 0);
             // vote
+            auto t_once_circle_start = high_resolution_clock::now();
             for (const auto& e : edgelist) {
                 int cx = int(round(e.x + r * e.nx));
                 int cy = int(round(e.y + r * e.ny));
@@ -123,33 +123,38 @@ int main(int argc, char** argv) {
                 int cy2 = int(round(e.y - r * e.ny));
                 if (cx2 >= 0 && cx2 < W && cy2 >= 0 && cy2 < H) acc[cy2 * W + cx2]++;
             }
-            // scan best
-            int local_best = 0, local_cx = 0, local_cy = 0;
-            for (size_t i = 0; i < acc.size(); ++i) {
-                if (acc[i] > local_best) {
-                    local_best = acc[i];
-                    local_cx = i % W;
-                    local_cy = i / W;
-                }
-            }
-            if (local_best > best_votes) {
-                best_votes = local_best;
-                best_cx = local_cx;
-                best_cy = local_cy;
-                best_r = r;
-            }
+            auto t_once_circle_end = high_resolution_clock::now();
+            double once_circle_ms =
+                duration<double, milli>(t_once_circle_end - t_once_circle_start).count();
+            cout << "Radius " << r << " voting time: " << once_circle_ms << " ms\n";
+            
+            // // scan best
+            // int local_best = 0, local_cx = 0, local_cy = 0;
+            // for (size_t i = 0; i < acc.size(); ++i) {
+            //     if (acc[i] > local_best) {
+            //         local_best = acc[i];
+            //         local_cx = i % W;
+            //         local_cy = i / W;
+            //     }
+            // }
+            // if (local_best > best_votes) {
+            //     best_votes = local_best;
+            //     best_cx = local_cx;
+            //     best_cy = local_cy;
+            //     best_r = r;
+            // }
         }
         auto t_vote_end = high_resolution_clock::now();
         double vote_ms = duration<double, milli>(t_vote_end - t_vote).count();
         cout << "Voting total: " << vote_ms << " ms\n";
-        cout << "Best circle: cx=" << best_cx << " cy=" << best_cy << " r=" << best_r
-             << " votes=" << best_votes << "\n";
-        Mat out = img.clone();
-        if (best_votes > 0) {
-            circle(out, Point(best_cx, best_cy), best_r, Scalar(0, 255, 0), 3);
-            circle(out, Point(best_cx, best_cy), 3, Scalar(0, 0, 255), -1);
-        }
-        imwrite(p.output, out);
+        // cout << "Best circle: cx=" << best_cx << " cy=" << best_cy << " r=" << best_r
+        //      << " votes=" << best_votes << "\n";
+        // Mat out = img.clone();
+        // if (best_votes > 0) {
+        //     circle(out, Point(best_cx, best_cy), best_r, Scalar(0, 255, 0), 3);
+        //     circle(out, Point(best_cx, best_cy), 3, Scalar(0, 0, 255), -1);
+        // }
+        // imwrite(p.output, out);
     } else {  // line
         int theta_step = p.theta_step_deg;
         int ntheta = 180 / theta_step;
@@ -179,28 +184,30 @@ int main(int argc, char** argv) {
         auto t_vote_end = high_resolution_clock::now();
         double vote_ms = duration<double, milli>(t_vote_end - t_vote).count();
         cout << "Voting total: " << vote_ms << " ms\n";
-        int best_votes = 0, bt = 0, br = 0;
-        for (int ti = 0; ti < ntheta; ++ti) {
-            for (int ri = 0; ri < nrho; ++ri) {
-                int v = acc[ti * nrho + ri];
-                if (v > best_votes) {
-                    best_votes = v;
-                    bt = ti;
-                    br = ri;
-                }
-            }
-        }
-        float best_theta = bt * theta_step * CV_PI / 180.0f;
-        float best_rho = br - rho_off;
-        cout << "Best line: rho=" << best_rho << " theta(deg)=" << (best_theta * 180.0f / CV_PI)
-             << " votes=" << best_votes << "\n";
-        Mat out = img.clone();
-        double a = cos(best_theta), b = sin(best_theta);
-        double x0 = a * best_rho, y0 = b * best_rho;
-        Point p1(cvRound(x0 + 2000 * (-b)), cvRound(y0 + 2000 * (a)));
-        Point p2(cvRound(x0 - 2000 * (-b)), cvRound(y0 - 2000 * (a)));
-        line(out, p1, p2, Scalar(0, 0, 255), 3);
-        imwrite(p.output, out);
+
+
+        // int best_votes = 0, bt = 0, br = 0;
+        // for (int ti = 0; ti < ntheta; ++ti) {
+        //     for (int ri = 0; ri < nrho; ++ri) {
+        //         int v = acc[ti * nrho + ri];
+        //         if (v > best_votes) {
+        //             best_votes = v;
+        //             bt = ti;
+        //             br = ri;
+        //         }
+        //     }
+        // }
+        // float best_theta = bt * theta_step * CV_PI / 180.0f;
+        // float best_rho = br - rho_off;
+        // cout << "Best line: rho=" << best_rho << " theta(deg)=" << (best_theta * 180.0f / CV_PI)
+        //      << " votes=" << best_votes << "\n";
+        // Mat out = img.clone();
+        // double a = cos(best_theta), b = sin(best_theta);
+        // double x0 = a * best_rho, y0 = b * best_rho;
+        // Point p1(cvRound(x0 + 2000 * (-b)), cvRound(y0 + 2000 * (a)));
+        // Point p2(cvRound(x0 - 2000 * (-b)), cvRound(y0 - 2000 * (a)));
+        // line(out, p1, p2, Scalar(0, 0, 255), 3);
+        // imwrite(p.output, out);
     }
 
     auto t_total_end = high_resolution_clock::now();

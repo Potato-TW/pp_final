@@ -1,6 +1,0 @@
-Voting total: 32.6378 ms
-Best line: rho=0 theta(deg)=90 votes=211
-Timing summary (ms): Canny=175.686 Grad=640.248 Total=6821.63
-Voting total: 9996.84 ms
-Best circle: cx=3365 cy=3568 r=27 votes=11
-Timing summary (ms): Canny=159.203 Grad=465.002 Total=16248.7

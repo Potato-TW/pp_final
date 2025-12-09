@@ -17,3 +17,5 @@ $(TARGET_STAR): main_star.cu
 clean:
 	rm -f $(TARGET) $(TARGET_STAR)
 
+remove:
+	rm -f *.png

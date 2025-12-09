@@ -149,10 +149,10 @@ int main(int argc,char**argv){
         float best_theta = bt * theta_step * M_PI / 180.0f;
         float best_rho = br - rho_off;
         cout<<"Best line (GPU): rho="<<best_rho<<" theta(deg)="<<(best_theta*180.0f/M_PI)<<" votes="<<best_votes<<"\n";
-        Mat out = img.clone();
-        double a=cos(best_theta), b=sin(best_theta); double x0=a*best_rho, y0=b*best_rho;
-        Point p1(cvRound(x0+2000*(-b)), cvRound(y0+2000*(a))), p2(cvRound(x0-2000*(-b)), cvRound(y0-2000*(a)));
-        line(out,p1,p2,Scalar(0,0,255),3); imwrite(p.output,out);
+        // Mat out = img.clone();
+        // double a=cos(best_theta), b=sin(best_theta); double x0=a*best_rho, y0=b*best_rho;
+        // Point p1(cvRound(x0+2000*(-b)), cvRound(y0+2000*(a))), p2(cvRound(x0-2000*(-b)), cvRound(y0-2000*(a)));
+        // line(out,p1,p2,Scalar(0,0,255),3); imwrite(p.output,out);
         CUDA_CHECK(cudaFree(d_acc));
         CUDA_CHECK(cudaEventDestroy(start)); CUDA_CHECK(cudaEventDestroy(stop));
     } else {
@@ -185,7 +185,7 @@ int main(int argc,char**argv){
         }
         cout<<"CUDA kernel (circle) time: "<<total_kernel_ms<<" ms\n";
         cout<<"Best circle (GPU): cx="<<best_cx<<" cy="<<best_cy<<" r="<<best_r<<" votes="<<best_votes<<"\n";
-        Mat out=img.clone(); if(best_votes>0) circle(out,Point(best_cx,best_cy),best_r,Scalar(0,255,0),3); imwrite(p.output,out);
+        // Mat out=img.clone(); if(best_votes>0) circle(out,Point(best_cx,best_cy),best_r,Scalar(0,255,0),3); imwrite(p.output,out);
     }
 
     CUDA_CHECK(cudaFree(d_edges));

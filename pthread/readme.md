@@ -1,1 +1,0 @@
-與 OpenMP 類似，但使用 pthread（對於 MPI 與 cluster 測試常見）。對 circle 採「per-radius」allocate accumulator，並在每個 radius 建 threads 分區 edges 投票；對 line 則把 edgelist 分 shards，thread 各自投票到 shared accumulator（atomic 或 per-thread local then merge）。

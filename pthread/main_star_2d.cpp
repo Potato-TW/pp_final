@@ -5,21 +5,23 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <vector>
+
 using namespace std;
 using namespace cv;
 using namespace chrono;
 
 struct Params {
-    string input, output = "output_star.png", mode = "circle";
+    string input, output = "output.png", mode = "circle";
     int rmin = 100, rmax = 200, rstep = 1;
     int canny_low = 80, canny_high = 180;
     int theta_step_deg = 1, theta_window_deg = 4;
     int threads = 8;
 };
+
 Params parse_args(int argc, char** argv) {
     Params p;
     if (argc < 2) {
-        cerr << "Usage\n";
+        cerr << "Usage: " << argv[0] << " input.png [options]\n";
         exit(1);
     }
     p.input = argv[1];
@@ -42,11 +44,10 @@ Params parse_args(int argc, char** argv) {
         else if (a == "-t" && i + 1 < argc)
             p.threads = stoi(argv[++i]);
     }
-
     if (p.mode == "circle")
-        p.output = "out_circle_pthreads.png";
+        p.output = "out_circle_pthreads_2d.png";
     else if (p.mode == "line")
-        p.output = "out_line_pthreads.png";
+        p.output = "out_line_pthreads_2d.png";
     return p;
 }
 
@@ -56,16 +57,18 @@ struct Edge {
     int x, y;
     float nx, ny, ori;
 };
-struct ThreadArg {
+
+// ---------------- Circle pthread ----------------
+struct ThreadArgCircle2D {
     const vector<Edge>* edges;
     size_t start, end;
     int r, W, H;
-    vector<int>* acc;
+    vector<vector<int>>* acc2d;
     double elapsed_ms;
 };
 
-void* vote_circle_thread(void* arg) {
-    ThreadArg* ta = (ThreadArg*)arg;
+void* vote_circle_thread_2d(void* arg) {
+    ThreadArgCircle2D* ta = (ThreadArgCircle2D*)arg;
     const vector<Edge>& edges = *ta->edges;
 
     auto t0 = high_resolution_clock::now();
@@ -73,30 +76,31 @@ void* vote_circle_thread(void* arg) {
         const Edge& e = edges[i];
         int cx = int(round(e.x + ta->r * e.nx));
         int cy = int(round(e.y + ta->r * e.ny));
-        if (cx >= 0 && cx < ta->W && cy >= 0 && cy < ta->H)
-            atomic_inc_int(&(*ta->acc)[cy * ta->W + cx]);
+        if (cx >= 0 && cx < ta->W && cy >= 0 && cy < ta->H) atomic_inc_int(&(*ta->acc2d)[cy][cx]);
         int cx2 = int(round(e.x - ta->r * e.nx));
         int cy2 = int(round(e.y - ta->r * e.ny));
         if (cx2 >= 0 && cx2 < ta->W && cy2 >= 0 && cy2 < ta->H)
-            atomic_inc_int(&(*ta->acc)[cy2 * ta->W + cx2]);
+            atomic_inc_int(&(*ta->acc2d)[cy2][cx2]);
     }
 
     auto t1 = high_resolution_clock::now();
     ta->elapsed_ms = duration<double, milli>(t1 - t0).count();
+
     return nullptr;
 }
 
-struct ThreadArgLine {
+// ---------------- Line pthread ----------------
+struct ThreadArgLine2D {
     const vector<Edge>* edges;
     size_t start, end;
     int theta_step, theta_window, ntheta, nrho, rho_off;
     int W, H;
-    vector<int>* acc;
+    vector<vector<int>>* acc2d;
     double elapsed_ms;
 };
 
-void* vote_line_thread(void* arg) {
-    ThreadArgLine* ta = (ThreadArgLine*)arg;
+void* vote_line_thread_2d(void* arg) {
+    ThreadArgLine2D* ta = (ThreadArgLine2D*)arg;
     const vector<Edge>& edges = *ta->edges;
 
     auto t0 = high_resolution_clock::now();
@@ -114,9 +118,7 @@ void* vote_line_thread(void* arg) {
             float theta = deg * CV_PI / 180.0f;
             float rho = e.x * cos(theta) + e.y * sin(theta);
             int ri = int(round(rho)) + ta->rho_off;
-            if (ri >= 0 && ri < ta->nrho) {
-                atomic_inc_int(&(*ta->acc)[ti * ta->nrho + ri]);
-            }
+            if (ri >= 0 && ri < ta->nrho) atomic_inc_int(&(*ta->acc2d)[ti][ri]);
         }
     }
     auto t1 = high_resolution_clock::now();
@@ -125,15 +127,18 @@ void* vote_line_thread(void* arg) {
     return nullptr;
 }
 
+// ---------------- Main ----------------
 int main(int argc, char** argv) {
     auto t_total_start = high_resolution_clock::now();
     auto t_readimg = high_resolution_clock::now();
     Params p = parse_args(argc, argv);
+
     Mat img = imread(p.input);
     if (img.empty()) {
         cerr << "Cannot open image\n";
         return -1;
     }
+
     auto t_readimg_end = high_resolution_clock::now();
     double readimg_ms = duration<double, milli>(t_readimg_end - t_readimg).count();
     cout << "Image read time: " << readimg_ms << " ms\n";
@@ -146,10 +151,8 @@ int main(int argc, char** argv) {
     cout << "Color conversion time: " << cvtcolor_ms << " ms\n";
 
     auto t0 = high_resolution_clock::now();
-
     Mat edges;
     Canny(gray, edges, p.canny_low, p.canny_high);
-
     auto t1 = high_resolution_clock::now();
     double canny_ms = duration<double, milli>(t1 - t0).count();
     cout << "Canny: " << canny_ms << " ms\n";
@@ -184,39 +187,39 @@ int main(int argc, char** argv) {
     cout << "Grad: " << grad_ms << " ms\n";
 
     int W = gray.cols, H = gray.rows;
+
     if (p.mode == "circle") {
         int rmin = p.rmin, rmax = p.rmax, rstep = p.rstep;
         int best_votes = 0, best_cx = 0, best_cy = 0, best_r = 0;
 
         cout << "Edges: " << edgelist.size() << "\n";
 
+        vector<vector<int>> acc2d(H, vector<int>(W, 0));
+
         struct timer {
             int cnt;
             float time;
         };
-
         vector<timer> time_vec(p.threads);
         for (auto& i : time_vec) {
             i.cnt = 0;
             i.time = 0.0f;
         }
 
-        vector<int> acc((size_t)W * H);
         auto t_vote_start = high_resolution_clock::now();
         for (int r = rmin; r <= rmax; r += rstep) {
-            auto a = high_resolution_clock::now();
-            fill(acc.begin(), acc.end(), 0);
-            // spawn threads
+            for (int y = 0; y < H; y++) fill(acc2d[y].begin(), acc2d[y].end(), 0);
+
             int T = p.threads;
             vector<pthread_t> tids(T);
-            vector<ThreadArg> targs(T);
+            vector<ThreadArgCircle2D> targs(T);
             size_t N = edgelist.size();
             size_t per = (N + T - 1) / T;
             for (int ti = 0; ti < T; ++ti) {
                 size_t s = ti * per;
                 size_t e = min(N, s + per);
-                targs[ti] = {&edgelist, s, e, r, W, H, &acc};
-                if (s < e) pthread_create(&tids[ti], nullptr, vote_circle_thread, &targs[ti]);
+                targs[ti] = {&edgelist, s, e, r, W, H, &acc2d};
+                if (s < e) pthread_create(&tids[ti], nullptr, vote_circle_thread_2d, &targs[ti]);
                 // else
                 //     pthread_create(
                 //         &tids[ti], nullptr, [](void*) -> void* { return nullptr; }, nullptr);
@@ -224,21 +227,19 @@ int main(int argc, char** argv) {
             for (int ti = 0; ti < T; ++ti) pthread_join(tids[ti], nullptr);
 
             // int local_best = 0, lcx = 0, lcy = 0;
-            // for (size_t i = 0; i < acc.size(); ++i)
-            //     if (acc[i] > local_best) {
-            //         local_best = acc[i];
-            //         lcx = i % W;
-            //         lcy = i / W;
-            //     }
+            // for (int y = 0; y < H; y++)
+            //     for (int x = 0; x < W; x++)
+            //         if (acc2d[y][x] > local_best) {
+            //             local_best = acc2d[y][x];
+            //             lcx = x;
+            //             lcy = y;
+            //         }
             // if (local_best > best_votes) {
             //     best_votes = local_best;
             //     best_cx = lcx;
             //     best_cy = lcy;
             //     best_r = r;
             // }
-            // auto b = high_resolution_clock::now();
-            // double ms = duration<double, milli>(b - a).count();
-            // cout << "once voting time: " << ms << " ms\n";
 
             for (int ti = 0; ti < time_vec.size(); ti++) {
                 time_vec[ti].cnt++;
@@ -246,68 +247,48 @@ int main(int argc, char** argv) {
             }
         }
 
-        auto t_vote_end = high_resolution_clock::now();
-        cout << "Voting: " << duration<double, milli>(t_vote_end - t_vote_start).count() << " ms\n";
-
         for (int t = 0; t < time_vec.size(); t++)
             cout << "Thread " << t << " time: " << time_vec[t].time << " ms\n";
 
-        // Mat out_gray;W
-        // cvtColor(gray, out_gray, COLOR_GRAY2BGR);  // gray → 3 channels
+        auto t_vote_end = high_resolution_clock::now();
+        cout << "Voting: " << duration<double, milli>(t_vote_end - t_vote_start).count() << " ms\n";
 
-        // if (best_votes > 0) {
-        //     // 圈起圓：綠色 + 粗線
-        //     circle(out_gray, Point(best_cx, best_cy), best_r, Scalar(0, 255, 0), 3);
-        //     // 畫出中心點：紅色
-        //     circle(out_gray, Point(best_cx, best_cy), 4, Scalar(0, 0, 255), -1);
-        // }
-
-        // imwrite(p.output, out_gray);
-        // cout << "Saved: " << p.output << "\n";
-    } else {
+    } else {  // line
         int theta_step = p.theta_step_deg;
         int ntheta = 180 / theta_step;
         float diag = sqrt((float)W * W + (float)H * H);
         int nrho = int(diag) * 2 + 1;
         int rho_off = nrho / 2;
 
-        vector<int> acc((size_t)nrho * ntheta);
-        fill(acc.begin(), acc.end(), 0);
+        vector<vector<int>> acc2d(ntheta, vector<int>(nrho, 0));
 
         int T = p.threads;
         vector<pthread_t> tids(T);
-        vector<ThreadArgLine> targs(T);
+        vector<ThreadArgLine2D> targs(T);
         size_t N = edgelist.size();
         size_t per = (N + T - 1) / T;
 
         auto t_vote_start = high_resolution_clock::now();
+
         for (int ti = 0; ti < T; ++ti) {
             size_t s = ti * per;
             size_t e = min(N, s + per);
-            targs[ti].edges = &edgelist;
-            targs[ti].start = s;
-            targs[ti].end = e;
-            targs[ti].theta_step = theta_step;
-            targs[ti].theta_window = p.theta_window_deg;
-            targs[ti].ntheta = ntheta;
-            targs[ti].nrho = nrho;
-            targs[ti].rho_off = rho_off;
-            targs[ti].W = W;
-            targs[ti].H = H;
-            targs[ti].acc = &acc;
-            if (s < e) pthread_create(&tids[ti], nullptr, vote_line_thread, &targs[ti]);
+            targs[ti] = {&edgelist, s, e, theta_step, p.theta_window_deg, ntheta, nrho,
+                         rho_off,   W, H, &acc2d};
+            if (s < e) pthread_create(&tids[ti], nullptr, vote_line_thread_2d, &targs[ti]);
             // else
             //     pthread_create(&tids[ti], nullptr, [](void*) -> void* { return nullptr; },
             //     nullptr);
         }
         for (int ti = 0; ti < T; ++ti) pthread_join(tids[ti], nullptr);
+
         auto t_vote_end = high_resolution_clock::now();
         cout << "Voting: " << duration<double, milli>(t_vote_end - t_vote_start).count() << " ms\n";
 
         // int best_votes = 0, bt = 0, br = 0;
         // for (int ti = 0; ti < ntheta; ++ti)
         //     for (int ri = 0; ri < nrho; ++ri) {
-        //         int v = acc[ti * nrho + ri];
+        //         int v = acc2d[ti][ri];
         //         if (v > best_votes) {
         //             best_votes = v;
         //             bt = ti;
@@ -318,22 +299,12 @@ int main(int argc, char** argv) {
         // float best_rho = br - rho_off;
         // cout << "Best line: rho=" << best_rho << " theta(deg)=" << (best_theta * 180.0f / CV_PI)
         //      << " votes=" << best_votes << "\n";
-        // Mat out_gray;
-        // cvtColor(gray, out_gray, COLOR_GRAY2BGR);
-
-        // double a = cos(best_theta), b = sin(best_theta);
-        // double x0 = a * best_rho, y0 = b * best_rho;
-        // Point p1(cvRound(x0 + 2000 * (-b)), cvRound(y0 + 2000 * (a)));
-        // Point p2(cvRound(x0 - 2000 * (-b)), cvRound(y0 - 2000 * (a)));
-
-        // line(out_gray, p1, p2, Scalar(0, 0, 255), 3);  // 紅色
-
-        // imwrite(p.output, out_gray);
-        // cout << "Saved: " << p.output << "\n";
-
         for (int t = 0; t < p.threads; t++)
             cout << "Thread " << t << " time: " << targs[t].elapsed_ms << " ms\n";
     }
+
+    // for (int t = 0; t < T; t++)
+    //     cout << "Thread " << t << " time: " << targs[t].elapsed_ms << " ms\n";
 
     auto t_total_end = high_resolution_clock::now();
     cout << " Total=" << duration<double, milli>(t_total_end - t_total_start).count() << "\n";
