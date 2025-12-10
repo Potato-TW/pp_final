@@ -1,0 +1,483 @@
+=== Image: ./pic/star_8k.png ===
+--- Mode: line ---
+Threads: 1
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 86.4912 ms
+Best line: rho=0 theta(deg)=90 votes=162
+thread: 0 time: 86.4825 ms
+ms
+Total time: 1081.73 ms
+
+Threads: 2
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 99.1214 ms
+Best line: rho=0 theta(deg)=90 votes=162
+thread: 0 time: 99.0084 ms
+thread: 1 time: 99.0054 ms
+ms
+Total time: 1114.7 ms
+
+Threads: 3
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 58.0277 ms
+Best line: rho=0 theta(deg)=90 votes=162
+thread: 0 time: 57.924 ms
+thread: 1 time: 57.9225 ms
+thread: 2 time: 57.9243 ms
+ms
+Total time: 1049.29 ms
+
+Threads: 4
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 47.5979 ms
+Best line: rho=0 theta(deg)=90 votes=162
+thread: 0 time: 47.4498 ms
+thread: 1 time: 47.4473 ms
+thread: 2 time: 47.4473 ms
+thread: 3 time: 47.4487 ms
+ms
+Total time: 1028.26 ms
+
+Threads: 5
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 37.1335 ms
+Best line: rho=0 theta(deg)=90 votes=162
+thread: 0 time: 36.9532 ms
+thread: 1 time: 36.9512 ms
+thread: 2 time: 36.9529 ms
+thread: 3 time: 36.9519 ms
+thread: 4 time: 36.953 ms
+ms
+Total time: 1021.28 ms
+
+Threads: 6
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 27.8595 ms
+Best line: rho=0 theta(deg)=90 votes=162
+thread: 0 time: 27.6275 ms
+thread: 1 time: 27.6257 ms
+thread: 2 time: 27.6257 ms
+thread: 3 time: 27.6261 ms
+thread: 4 time: 27.6257 ms
+thread: 5 time: 27.6257 ms
+ms
+Total time: 1003.98 ms
+
+Threads: 7
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 24.3302 ms
+Best line: rho=0 theta(deg)=90 votes=162
+thread: 0 time: 23.8281 ms
+thread: 1 time: 23.8282 ms
+thread: 2 time: 23.8282 ms
+thread: 3 time: 23.828 ms
+thread: 4 time: 23.8282 ms
+thread: 5 time: 23.8282 ms
+thread: 6 time: 23.8173 ms
+ms
+Total time: 1001.11 ms
+
+Threads: 8
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 31.2591 ms
+Best line: rho=0 theta(deg)=90 votes=162
+thread: 0 time: 31.0187 ms
+thread: 1 time: 31.0168 ms
+thread: 2 time: 31.0183 ms
+thread: 3 time: 31.0169 ms
+thread: 4 time: 31.0184 ms
+thread: 5 time: 31.0168 ms
+thread: 6 time: 31.0184 ms
+thread: 7 time: 31.0167 ms
+ms
+Total time: 1005.41 ms
+
+Threads: 9
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 20.8984 ms
+Best line: rho=0 theta(deg)=90 votes=162
+thread: 0 time: 20.6125 ms
+thread: 1 time: 20.6125 ms
+thread: 2 time: 20.6123 ms
+thread: 3 time: 20.6124 ms
+thread: 4 time: 20.6109 ms
+thread: 5 time: 20.6124 ms
+thread: 6 time: 20.6112 ms
+thread: 7 time: 20.6127 ms
+thread: 8 time: 20.6108 ms
+ms
+Total time: 987.652 ms
+
+Threads: 10
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 19.6555 ms
+Best line: rho=0 theta(deg)=90 votes=162
+thread: 0 time: 19.3452 ms
+thread: 1 time: 19.345 ms
+thread: 2 time: 19.3434 ms
+thread: 3 time: 19.3451 ms
+thread: 4 time: 19.3433 ms
+thread: 5 time: 19.171 ms
+thread: 6 time: 19.3434 ms
+thread: 7 time: 19.3452 ms
+thread: 8 time: 19.3434 ms
+thread: 9 time: 19.3448 ms
+ms
+Total time: 986.182 ms
+
+Threads: 11
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 17.8405 ms
+Best line: rho=0 theta(deg)=90 votes=162
+thread: 0 time: 17.5222 ms
+thread: 1 time: 17.5219 ms
+thread: 2 time: 17.5221 ms
+thread: 3 time: 17.5205 ms
+thread: 4 time: 17.5223 ms
+thread: 5 time: 17.5209 ms
+thread: 6 time: 17.522 ms
+thread: 7 time: 17.5204 ms
+thread: 8 time: 17.522 ms
+thread: 9 time: 17.5219 ms
+thread: 10 time: 17.5205 ms
+ms
+Total time: 987.507 ms
+
+Threads: 12
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 16.1624 ms
+Best line: rho=0 theta(deg)=90 votes=162
+thread: 0 time: 15.8002 ms
+thread: 1 time: 15.7994 ms
+thread: 2 time: 15.7994 ms
+thread: 3 time: 15.7996 ms
+thread: 4 time: 15.7996 ms
+thread: 5 time: 15.7995 ms
+thread: 6 time: 15.7996 ms
+thread: 7 time: 15.7996 ms
+thread: 8 time: 15.7974 ms
+thread: 9 time: 15.7994 ms
+thread: 10 time: 15.7974 ms
+thread: 11 time: 15.7996 ms
+ms
+Total time: 985.177 ms
+
+Threads: 13
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 18.2918 ms
+Best line: rho=0 theta(deg)=90 votes=162
+thread: 0 time: 17.9118 ms
+thread: 1 time: 17.9114 ms
+thread: 2 time: 17.9104 ms
+thread: 3 time: 17.9116 ms
+thread: 4 time: 17.9101 ms
+thread: 5 time: 17.9114 ms
+thread: 6 time: 17.9102 ms
+thread: 7 time: 17.9117 ms
+thread: 8 time: 17.9107 ms
+thread: 9 time: 17.9118 ms
+thread: 10 time: 17.9102 ms
+thread: 11 time: 17.9116 ms
+thread: 12 time: 17.9101 ms
+ms
+Total time: 987.626 ms
+
+Threads: 14
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 22.0289 ms
+Best line: rho=0 theta(deg)=90 votes=162
+thread: 0 time: 21.5764 ms
+thread: 1 time: 21.5759 ms
+thread: 2 time: 21.5761 ms
+thread: 3 time: 21.5761 ms
+thread: 4 time: 21.5745 ms
+thread: 5 time: 21.576 ms
+thread: 6 time: 21.5745 ms
+thread: 7 time: 21.5761 ms
+thread: 8 time: 21.5746 ms
+thread: 9 time: 21.576 ms
+thread: 10 time: 21.5746 ms
+thread: 11 time: 21.5759 ms
+thread: 12 time: 21.5746 ms
+thread: 13 time: 21.576 ms
+ms
+Total time: 997.142 ms
+
+Threads: 15
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 15.5281 ms
+Best line: rho=0 theta(deg)=90 votes=162
+thread: 0 time: 15.0884 ms
+thread: 1 time: 15.0874 ms
+thread: 2 time: 15.0859 ms
+thread: 3 time: 15.0877 ms
+thread: 4 time: 15.086 ms
+thread: 5 time: 15.0875 ms
+thread: 6 time: 15.0861 ms
+thread: 7 time: 15.0877 ms
+thread: 8 time: 15.0861 ms
+thread: 9 time: 15.0877 ms
+thread: 10 time: 15.0862 ms
+thread: 11 time: 15.0874 ms
+thread: 12 time: 15.086 ms
+thread: 13 time: 15.0879 ms
+thread: 14 time: 15.0862 ms
+ms
+Total time: 988.65 ms
+
+Threads: 16
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 15.284 ms
+Best line: rho=0 theta(deg)=90 votes=162
+thread: 0 time: 14.8465 ms
+thread: 1 time: 14.8462 ms
+thread: 2 time: 14.8444 ms
+thread: 3 time: 14.8461 ms
+thread: 4 time: 14.8443 ms
+thread: 5 time: 14.8462 ms
+thread: 6 time: 14.8443 ms
+thread: 7 time: 14.846 ms
+thread: 8 time: 14.8443 ms
+thread: 9 time: 14.8461 ms
+thread: 10 time: 14.8443 ms
+thread: 11 time: 14.8461 ms
+thread: 12 time: 14.8444 ms
+thread: 13 time: 14.8463 ms
+thread: 14 time: 14.8448 ms
+thread: 15 time: 14.8458 ms
+ms
+Total time: 997.45 ms
+
+--- Mode: circle ---
+Threads: 1
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 4041.98 ms
+thread: 0 time: 3250.49 ms
+Best circle center: (0,0) r=0 votes=0
+Total time: 5074.62 ms
+
+Threads: 2
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 3175.87 ms
+thread: 0 time: 2048.28 ms
+thread: 1 time: 2047.51 ms
+Best circle center: (0,0) r=0 votes=0
+Total time: 4221.74 ms
+
+Threads: 3
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 2100.18 ms
+thread: 0 time: 1190.87 ms
+thread: 1 time: 1190.27 ms
+thread: 2 time: 1190.21 ms
+Best circle center: (0,0) r=0 votes=0
+Total time: 3152.29 ms
+
+Threads: 4
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 2016.05 ms
+thread: 0 time: 954.388 ms
+thread: 1 time: 953.789 ms
+thread: 2 time: 953.688 ms
+thread: 3 time: 953.787 ms
+Best circle center: (0,0) r=0 votes=0
+Total time: 3073.32 ms
+
+Threads: 5
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 1911.91 ms
+thread: 0 time: 798.352 ms
+thread: 1 time: 797.707 ms
+thread: 2 time: 797.794 ms
+thread: 3 time: 797.708 ms
+thread: 4 time: 797.828 ms
+Best circle center: (0,0) r=0 votes=0
+Total time: 2955.18 ms
+
+Threads: 6
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 1857.62 ms
+thread: 0 time: 688.005 ms
+thread: 1 time: 687.56 ms
+thread: 2 time: 687.516 ms
+thread: 3 time: 687.37 ms
+thread: 4 time: 687.577 ms
+thread: 5 time: 687.363 ms
+Best circle center: (0,0) r=0 votes=0
+Total time: 2899.78 ms
+
+Threads: 7
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 1726.64 ms
+thread: 0 time: 587.923 ms
+thread: 1 time: 587.532 ms
+thread: 2 time: 587.333 ms
+thread: 3 time: 587.327 ms
+thread: 4 time: 587.389 ms
+thread: 5 time: 587.549 ms
+thread: 6 time: 587.366 ms
+Best circle center: (0,0) r=0 votes=0
+Total time: 2764.06 ms
+
+Threads: 8
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 1754.14 ms
+thread: 0 time: 564.916 ms
+thread: 1 time: 564.601 ms
+thread: 2 time: 564.268 ms
+thread: 3 time: 564.494 ms
+thread: 4 time: 564.293 ms
+thread: 5 time: 564.315 ms
+thread: 6 time: 564.143 ms
+thread: 7 time: 564.495 ms
+Best circle center: (0,0) r=0 votes=0
+Total time: 2785.52 ms
+
+Threads: 9
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 1718.23 ms
+thread: 0 time: 527.264 ms
+thread: 1 time: 526.764 ms
+thread: 2 time: 526.884 ms
+thread: 3 time: 526.544 ms
+thread: 4 time: 526.827 ms
+thread: 5 time: 526.635 ms
+thread: 6 time: 526.812 ms
+thread: 7 time: 526.637 ms
+thread: 8 time: 526.819 ms
+Best circle center: (0,0) r=0 votes=0
+Total time: 2776.6 ms
+
+Threads: 10
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 1858.67 ms
+thread: 0 time: 523.597 ms
+thread: 1 time: 523.348 ms
+thread: 2 time: 523.318 ms
+thread: 3 time: 522.826 ms
+thread: 4 time: 523.307 ms
+thread: 5 time: 522.079 ms
+thread: 6 time: 523.267 ms
+thread: 7 time: 522.862 ms
+thread: 8 time: 523.186 ms
+thread: 9 time: 521.011 ms
+Best circle center: (0,0) r=0 votes=0
+Total time: 2903.52 ms
+
+Threads: 11
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 1564.08 ms
+thread: 0 time: 423.2 ms
+thread: 1 time: 422.85 ms
+thread: 2 time: 422.351 ms
+thread: 3 time: 422.339 ms
+thread: 4 time: 422.896 ms
+thread: 5 time: 422.39 ms
+thread: 6 time: 422.792 ms
+thread: 7 time: 422.913 ms
+thread: 8 time: 422.5 ms
+thread: 9 time: 422.918 ms
+thread: 10 time: 422.476 ms
+Best circle center: (0,0) r=0 votes=0
+Total time: 2608.54 ms
+
+Threads: 12
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 1555.96 ms
+thread: 0 time: 400.735 ms
+thread: 1 time: 398.396 ms
+thread: 2 time: 401.87 ms
+thread: 3 time: 393.491 ms
+thread: 4 time: 401.886 ms
+thread: 5 time: 401 ms
+thread: 6 time: 401.626 ms
+thread: 7 time: 401.641 ms
+thread: 8 time: 398.464 ms
+thread: 9 time: 400.832 ms
+thread: 10 time: 401.904 ms
+thread: 11 time: 405.147 ms
+Best circle center: (0,0) r=0 votes=0
+Total time: 2595.26 ms
+
+Threads: 13
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 1521.51 ms
+thread: 0 time: 399.597 ms
+thread: 1 time: 399.275 ms
+thread: 2 time: 399.141 ms
+thread: 3 time: 399.255 ms
+thread: 4 time: 399.055 ms
+thread: 5 time: 399.354 ms
+thread: 6 time: 399.125 ms
+thread: 7 time: 399.361 ms
+thread: 8 time: 399.089 ms
+thread: 9 time: 399.406 ms
+thread: 10 time: 399.169 ms
+thread: 11 time: 399.16 ms
+thread: 12 time: 399.079 ms
+Best circle center: (0,0) r=0 votes=0
+Total time: 2571.73 ms
+
+Threads: 14
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 1584.51 ms
+thread: 0 time: 407.575 ms
+thread: 1 time: 407.268 ms
+thread: 2 time: 406.568 ms
+thread: 3 time: 405.537 ms
+thread: 4 time: 407.129 ms
+thread: 5 time: 405.947 ms
+thread: 6 time: 405.057 ms
+thread: 7 time: 407.487 ms
+thread: 8 time: 404.125 ms
+thread: 9 time: 407.325 ms
+thread: 10 time: 407.44 ms
+thread: 11 time: 404.056 ms
+thread: 12 time: 406.405 ms
+thread: 13 time: 407.063 ms
+Best circle center: (0,0) r=0 votes=0
+Total time: 2625.63 ms
+
+Threads: 15
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 1479.39 ms
+thread: 0 time: 360.833 ms
+thread: 1 time: 360.651 ms
+thread: 2 time: 360.065 ms
+thread: 3 time: 360.6 ms
+thread: 4 time: 360.065 ms
+thread: 5 time: 360.373 ms
+thread: 6 time: 360.392 ms
+thread: 7 time: 359.788 ms
+thread: 8 time: 360.421 ms
+thread: 9 time: 360.624 ms
+thread: 10 time: 360.318 ms
+thread: 11 time: 360.649 ms
+thread: 12 time: 360.36 ms
+thread: 13 time: 360.222 ms
+thread: 14 time: 359.876 ms
+Best circle center: (0,0) r=0 votes=0
+Total time: 2550 ms
+
+Threads: 16
+libpng warning: iCCP: known incorrect sRGB profile
+Voting: 1569.16 ms
+thread: 0 time: 358.946 ms
+thread: 1 time: 359.135 ms
+thread: 2 time: 358.403 ms
+thread: 3 time: 358.68 ms
+thread: 4 time: 358.974 ms
+thread: 5 time: 358.982 ms
+thread: 6 time: 358.305 ms
+thread: 7 time: 358.9 ms
+thread: 8 time: 358.646 ms
+thread: 9 time: 358.787 ms
+thread: 10 time: 358.695 ms
+thread: 11 time: 358.776 ms
+thread: 12 time: 358.878 ms
+thread: 13 time: 358.632 ms
+thread: 14 time: 358.635 ms
+thread: 15 time: 358.462 ms
+Best circle center: (0,0) r=0 votes=0
+Total time: 2627.06 ms
+
