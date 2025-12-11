@@ -111,6 +111,7 @@ int main(int argc, char** argv) {
         auto t_vote = high_resolution_clock::now();
         // per-radius accumulator to save memory
         vector<int> acc((size_t)W * H);
+
         for (int r = rmin; r <= rmax; r += rstep) {
             fill(acc.begin(), acc.end(), 0);
             // vote
@@ -128,21 +129,7 @@ int main(int argc, char** argv) {
                 duration<double, milli>(t_once_circle_end - t_once_circle_start).count();
             cout << "Radius " << r << " voting time: " << once_circle_ms << " ms\n";
             
-            // // scan best
-            // int local_best = 0, local_cx = 0, local_cy = 0;
-            // for (size_t i = 0; i < acc.size(); ++i) {
-            //     if (acc[i] > local_best) {
-            //         local_best = acc[i];
-            //         local_cx = i % W;
-            //         local_cy = i / W;
-            //     }
-            // }
-            // if (local_best > best_votes) {
-            //     best_votes = local_best;
-            //     best_cx = local_cx;
-            //     best_cy = local_cy;
-            //     best_r = r;
-            // }
+            
         }
         auto t_vote_end = high_resolution_clock::now();
         double vote_ms = duration<double, milli>(t_vote_end - t_vote).count();
